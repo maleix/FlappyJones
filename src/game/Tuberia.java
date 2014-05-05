@@ -18,10 +18,9 @@ class Tuberia {
     int x;
     int y;
     int speedX;
-    int speedY;
-    int speedy;
     int ampladaTuberia;
     int alturaTUberia;
+    final int distanciaTuberies;
 
     /**
      * P
@@ -30,9 +29,9 @@ class Tuberia {
      */
     public Tuberia(FlappyJones game, int x) {
         this.game = game;
+        distanciaTuberies = 105;
         y = 0;
         speedX = -1; //Es mouran cap a l'esquerra a velocitat d 1 pixel
-        speedy = 0; //Verticalment no es mouran
         this.x = x;
         ampladaTuberia = 40;
         alturaTUberia = 250;
@@ -43,7 +42,7 @@ class Tuberia {
         ImageIcon welcome = new ImageIcon(getClass().getResource("Bandera_Argentina.png"));
         g2d.drawImage(welcome.getImage(), x, y, ampladaTuberia, alturaTUberia, null);
         //El 900 es exagerat, pero aixi sempre entra a la pantalla
-        g2d.drawImage(welcome.getImage(), x, alturaTUberia+105, ampladaTuberia, 900, null);
+        g2d.drawImage(welcome.getImage(), x, alturaTUberia+distanciaTuberies, ampladaTuberia, 900, null);
 //        g2d.fillRect(x, y, ampladaEnemy, alturaEnemy);
 //        g2d.fillRect(x, alturaEnemy+120, ampladaEnemy, 900); //akest 900 surt per sota de la pantalla pero es igual
     }
@@ -121,13 +120,6 @@ class Tuberia {
         return ampladaTuberia;
     }
     
-//    /**
-//     * 
-//     * @return 
-//     */
-//    int getCostatSuperior() {
-//        return ampladaTuberia;
-//    }
     
     /**
      * Altura de la tuberia d'abaix

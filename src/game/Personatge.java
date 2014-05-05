@@ -14,25 +14,32 @@ import java.awt.event.KeyEvent;
  */
 class Personatge {
 
-    FlappyJones game;
-    int x;
-    int y;
-    int speedX;
-    int speedY;
-    int limitJump;
-    int again;
-    int speedy;
+    private FlappyJones game;
+    private int x;
+    private int y;
+    private int speedY;
+    private int limitJump;
+    private int again;
+    private final int alturaDeSalt;
+    private final int velocitatDeSalt;
+    private final int velocitatCaiguda;
+    
 
     public Personatge(FlappyJones game) {
         this.game = game;
+        alturaDeSalt = 70;
+        velocitatDeSalt = +3;
+        velocitatCaiguda = 2;
         x = 100; //Posicions en la que s'inicialitza
         y = 20;
         limitJump=0;
         again= 0;
-        speedY = +2; //La pilota començara baixant
+        speedY = +velocitatCaiguda; //La pilota començara baixant
+        
     }
 
     void paint(Graphics2D g2d) {
+        //Mida del personatge
         g2d.fillOval(x, y, 25, 25);
 //       ImageIcon welcome = new ImageIcon(getClass().getResource(""));
 //       g2d.drawImage(welcome.getImage(), x, y, 35, 35, null);
@@ -46,7 +53,7 @@ class Personatge {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             //Si hi ha 70 pixels per poder saltar, salta fins a 70 pixels
             if (y-70 > 0) {
-            limitJump = y - 70;
+            limitJump = y - alturaDeSalt;
             }
             //En aquest cas, la pilota esta molt adalt i no te suficient espai per saltar
             //Per a que no surti de la pantalla, com a molt podra saltar fins al pixel 0
@@ -54,7 +61,7 @@ class Personatge {
                 limitJump = 0;
             }
             //Això farà que la pilota puji a una velocitat de 3 pixels per bucle
-            speedY = -3;
+            speedY = -velocitatDeSalt;
             //Variable auxiliar per saltar
             again = limitJump;
         }
@@ -70,7 +77,7 @@ class Personatge {
         //Cas en que s'ha premut la tecla SPACE i la pilota puja 70 pixels, mentres 
         //la posicio actual no superi els 70 pixels, segueix pujant
         if (again >= y) {
-            speedY = +2;
+            speedY = +velocitatCaiguda;
         }
     }
     
